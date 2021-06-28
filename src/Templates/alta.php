@@ -25,6 +25,7 @@ and open the template in the editor.
             flex-direction: column;
             text-align: center;
             margin-top: 5%;
+            padding: 1em;
         }
 
         .row {
@@ -287,6 +288,7 @@ and open the template in the editor.
         <div id="messageBox">
 
         </div>
+        <a href="/showUsers">Consulta todos los usuarios</a>
     </div>
 
     <script>

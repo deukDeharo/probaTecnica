@@ -27,8 +27,11 @@ class UserController
             $message = array('message' => "Error en el servidor");
             return $this->createResponse($response, 500, $message);
         }
-        $this->fetchUsers($result);
-
+        //DEVOLVER ARRAY DE USUARIOS DE LA TABLA USERS
+        $data = $this->fetchUsers($result);
+        $db->disconnect($connection);
+        $message = array('data' => $data);
+        return $this->createResponse($response, 200, $message);
 
 
     }
@@ -125,17 +128,17 @@ class UserController
 
     function selectAllUsers($connection)
     {
-        $query = "SELECT * FROM users";
+        $query = "SELECT nombre,apellido,email,dni,movil FROM users";
         $result = mysqli_query($connection, $query);
         return $result;
             
     }
     function fetchUsers($result){
         $users = [];
-        while($registro = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-            var_dump($registro);
-            die();
+        while($registro = mysqli_fetch_array($result, MYSQLI_ASSOC)){ 
+            array_push($users,$registro);
         }
+        return $users;
     }
 
     //INSTANCIAR UN USUARIO A PARTIR DEL BODY DE LA REQUEST
